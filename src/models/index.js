@@ -10,6 +10,7 @@ const UserSchema = new Schema({
     type: String,
     required: true
   },
+  thumbnail: String,
   following: Number,
   followers: Number,
   total_post: Number
@@ -30,17 +31,14 @@ const PostSchema = new Schema({
   },
   date_created: {
     type: Date,
-    required: true
+    default: Date.now
   },
   images: [{
     type: String,
     required: true
   }],
   like: [{
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: 'user'
-    }
+    count: String
   }],
 })
 

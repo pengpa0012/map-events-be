@@ -3,6 +3,8 @@ const router = express.Router()
 const { verifyJWT } = require("../utils")
 
 
-router.get("/likePost", verifyJWT, async (req, res) => {})
+router.post("/likePost", verifyJWT, async (req, res) => {
+  const { id } = req.query.id
+})
 
 module.exports = router

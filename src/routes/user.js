@@ -24,7 +24,7 @@ router.post("/signup", async (req, res) => {
   } else {
     res.status(500).send({message: "Error signup"})
   }
-}) 
+})
 
 router.post("/login", async (req, res) => {
   const {username, password} = req.body

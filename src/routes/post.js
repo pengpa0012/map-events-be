@@ -25,9 +25,9 @@ router.get("/getPost", verifyJWT, async (req, res) => {
   }
 })
 
-router.get("/createPost", verifyJWT, async (req, res) => {
-  const { title, description, date_created, images } = req.body
-  const result = await Post.insertMany({title, description, date_created, images})
+router.post("/createPost", verifyJWT, async (req, res) => {
+  const { username, title, description, date_created, images } = req.body
+  const result = await Post.insertMany({username, title, description, date_created, images})
 
   if(result) {
     res.status(200).send({result})
@@ -36,7 +36,10 @@ router.get("/createPost", verifyJWT, async (req, res) => {
   }
 })
 
-router.get("/deletePost", verifyJWT, async (req, res) => {
+router.post("/deletePost", verifyJWT, async (req, res) => {
+  // TODO
+  // Delete all its comments on post
+
   const postId = req.query.id
   const result = await Post.deleteOne({ _id: postId })
 
