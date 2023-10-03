@@ -60,6 +60,8 @@ const CommentSchema = new Schema({
   }
 })
 
-module.exports = mongoose.model("user", UserSchema)
-module.exports = mongoose.model("post", PostSchema)
-module.exports = mongoose.model("comment", CommentSchema)
+module.exports = {
+  User: mongoose.model('User', UserSchema),
+  Post: mongoose.model('Post', PostSchema),
+  Comment: mongoose.model('Comment', CommentSchema)
+}
