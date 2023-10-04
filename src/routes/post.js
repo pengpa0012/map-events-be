@@ -26,8 +26,8 @@ router.get("/getPost", verifyJWT, async (req, res) => {
 })
 
 router.post("/createPost", verifyJWT, async (req, res) => {
-  const { username, title, description, date_created, images } = req.body
-  const result = await Post.insertMany({username, title, description, date_created, images})
+  const { username, title, description, location, date_created, images } = req.body
+  const result = await Post.insertMany({username, title, description, location, date_created, images})
 
   if(result) {
     res.status(200).send({result})

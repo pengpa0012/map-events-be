@@ -29,6 +29,10 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
+  location: {
+    lng: String,
+    lat: String
+  },
   date_created: {
     type: Date,
     default: Date.now
