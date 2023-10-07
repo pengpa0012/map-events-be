@@ -26,8 +26,8 @@ router.get("/getPost", verifyJWT, async (req, res) => {
 })
 
 router.post("/createPost", verifyJWT, async (req, res) => {
-  const { username, title, description, location, date_created, images } = req.body
-  const result = await Post.insertMany({username, title, description, location, date_created, images})
+  const { user, title, description, location, date_created, images } = req.body
+  const result = await Post.insertMany({user, title, description, location, date_created, images})
 
   if(result) {
     res.status(200).send({result})
@@ -37,9 +37,6 @@ router.post("/createPost", verifyJWT, async (req, res) => {
 })
 
 router.post("/deletePost", verifyJWT, async (req, res) => {
-  // TODO
-  // Delete all its comments on post
-
   const postId = req.query.id
   const result = await Post.deleteOne({ _id: postId })
 

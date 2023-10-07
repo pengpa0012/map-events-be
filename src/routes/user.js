@@ -46,4 +46,16 @@ router.post("/logout", verifyJWT, async (req, res) => {
   })
 })
 
+router.post("/getUser", verifyJWT, async (req, res) => {
+  const { id } = req.query
+  const result = User.findById({id})
+  
+  if(result) {
+    res.status(200).send({message: "user", result})
+  } else {
+    res.status(500).send({message: "Error Get User"})
+  }
+})
+
+
 module.exports = router
