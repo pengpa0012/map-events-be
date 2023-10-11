@@ -7,7 +7,6 @@ const { verifyJWT } = require("../utils");
 const { User } = require("../models");
 
 router.post("/signup", async (req, res) => {
-  console.log(req.body);
   const { username, password } = req.body;
   const checkUsername = await User.find({ username });
   if (checkUsername.length > 0) {
@@ -15,8 +14,7 @@ router.post("/signup", async (req, res) => {
     return;
   }
   const salt = await bcrypt.genSalt(10);
-  const hashPass = await bcrypt.hash(password, salt);
-
+  const hashPass = await bcrypt.hash(password.toString(), salt);
   const result = await User.insertMany({ username, password: hashPass });
 
   if (result) {
@@ -29,10 +27,9 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const result = await User.find({ username });
-
   if (
     result.length > 0 &&
-    (await bcrypt.compare(password, result[0].password))
+    (await bcrypt.compare(password.toString(), result[0].password))
   ) {
     const token = jwt.sign({ username }, process.env.ACCESS_TOKEN_SECRET, {
       expiresIn: "30d",
